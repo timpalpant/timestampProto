@@ -1,0 +1,46 @@
+syntax = "proto3";
+package main;
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
+
+
+message Int64 {
+  int64 time = 1;
+}
+
+message MyTimestamp {
+  int64 seconds = 1;
+  int32 nanos = 2;
+}
+
+message Embedded {
+  MyTimestamp time = 1;
+}
+
+message EmbeddedStdTime {
+  MyTimestamp time = 1 [(gogoproto.stdtime) = true];
+}
+
+message EmbeddedNonNull {
+  MyTimestamp time = 1 [(gogoproto.nullable) = false];
+}
+
+message EmbeddedStdTimeNonNull {
+  MyTimestamp time = 1  [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
+}
+
+message EmbeddedGoogleTimestamp {
+  google.protobuf.Timestamp timestamp = 1;
+}
+
+message EmbeddedGoogleTimestampStdTime {
+  google.protobuf.Timestamp timestamp = 1 [(gogoproto.stdtime) = true];
+}
+
+message EmbeddedGoogleTimestampNonNull {
+  google.protobuf.Timestamp timestamp = 1 [(gogoproto.nullable) = false];
+}
+
+message EmbeddedGoogleTimestampStdTimeNonNull {
+  google.protobuf.Timestamp timestamp = 1 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
+}
